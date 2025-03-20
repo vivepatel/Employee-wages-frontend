@@ -1,0 +1,33 @@
+<div class="details-container">
+  <h2>Employee Details</h2>
+  <button (click)="navigateToForm()">Add Employee</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Profile Image</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Start Date</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees; let i = index">
+        <td>{{ employee.name }}</td>
+        <td><img [src]="employee.profileImage" alt="Profile Image" width="50"></td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.departments.join(', ') }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>{{ employee.startDate.day }}/{{ employee.startDate.month }}/{{ employee.startDate.year }}</td>
+        <td>{{ employee.notes }}</td>
+        <td>
+          <button (click)="editEmployee(i)">Edit</button>
+          <button (click)="deleteEmployee(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

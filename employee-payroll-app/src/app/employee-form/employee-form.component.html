@@ -1,0 +1,67 @@
+<div class="form-container">
+  <h2>Employee Payroll Form</h2>
+  <button (click)="navigateToDetails()">View Employee Details</button>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="employee.name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Profile Image</label>
+      <div class="profile-images">
+        <div *ngFor="let image of profileImages" (click)="selectProfileImage(image)" [class.selected]="employee.profileImage === image">
+          <img [src]="image" alt="Profile Image" width="50">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="gender-options">
+        <label><input type="radio" [(ngModel)]="employee.gender" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" [(ngModel)]="employee.gender" name="gender" value="Female" required> Female</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Department</label>
+      <div class="department-options">
+        <label *ngFor="let department of departments">
+          <input type="checkbox" [(ngModel)]="employee.departments" [value]="department" [disabled]="employee.departments.length >= 2 && !employee.departments.includes(department)">
+          {{ department }}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <select id="salary" [(ngModel)]="employee.salary" name="salary" required>
+        <option value="30000">30,000</option>
+        <option value="50000">50,000</option>
+        <option value="75000">75,000</option>
+        <option value="100000">1,00,000</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Start Date</label>
+      <div class="date-group">
+        <input type="number" [(ngModel)]="employee.startDate.day" name="day" placeholder="Day" min="1" max="31" required>
+        <input type="number" [(ngModel)]="employee.startDate.month" name="month" placeholder="Month" min="1" max="12" required>
+        <input type="number" [(ngModel)]="employee.startDate.year" name="year" placeholder="Year" min="2000" max="2025" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea id="notes" [(ngModel)]="employee.notes" name="notes"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="onReset()">Reset</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
